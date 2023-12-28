@@ -52,12 +52,12 @@ export const categories: ({
 				mentions: 7
 			},
 			{
-				name: 'The holy father',
+				name: 'The holy father (The God of Love)',
 				description: 'God of the bible, sometimes on my side, sometimes on the enemies.',
 				mentions: 12
 			},
 			{
-				name: 'Satan',
+				name: 'Satan (The God of Evil)',
 				description: 'Master of deception and lies. Can never be trusted. For some time I thought it was my dad, because my mother called him that alot when I was younger, but I realize this is not the truth.',
 				mentions: 12
 			},
@@ -78,7 +78,13 @@ export const categories: ({
 			},
 			{
 				name: 'My father (The God of Justice) and his wife',
-				description: 'My father and his wife are sometimes as voices on the background to judge me, because they supposedly have secret plans with me. However, I believe these are just demons using their voices.'
+				description: 'My father and his wife are sometimes as voices on the background to judge me, because they supposedly have secret plans with me. However, I believe these are just demons using their voices.',
+				mentions: 3
+			},
+			{
+				name: 'An unknown holy man of the highest holiness',
+				description: 'This is a man who showed me miracles I can\'t even comprehend, I have witnessed what it is like to be in a different reality where there is no physics, and he kept me there just to keep me safe. As he does not want someone as pure as myself to be destructed by evil and chaos.',
+				mentions: 1
 			}
 		]
 	},
