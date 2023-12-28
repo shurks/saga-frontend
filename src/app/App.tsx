@@ -349,7 +349,16 @@ export const categories: ({
 			Reflect on the significant turning points or thresholds you've encountered.
 			These moments could represent changes in perception, events, or decisions made.
 		</>,
-		hex: '#8d6e63'
+		hex: '#8d6e63',
+		meta: {
+			type: 'thresholds',
+			values: [
+				{
+					title: 'Getting clearance of the situation',
+					description: 'When I ended up at the police station, after surely witnessing my ultimate doom, suddenly the voices of the Gods started to talk with me about balance. I learned alot about this, there can not be a God of love only, there has to be justice, there has to confusion, chaos, destruction, etcetera. Even though I felt a very satanic forcefield around my house, I still went back, as I believed to be the God of truth, and whatever I believed to be true was so.'
+				}
+			]
+		}
 	},
 	{
 		title: <>Symbols</>,
@@ -359,7 +368,16 @@ export const categories: ({
 			Explore the symbolic elements or representations that have appeared in your psychosis.
 			These could be objects, animals, or recurring symbols that hold significance in your experiences.
 		</>,
-		hex: '#ff9800'
+		hex: '#ff9800',
+		meta: {
+			type: 'symbols',
+			values: [
+				{
+					title: 'Angel numbers',
+					description: 'I used to believe in angel numbers, but that\'s when I was not convinced yet of the things I would figure out later, it only offered some assurance of the angels helping me out.' 
+				}
+			]
+		}
 	},
 	{
 		title: <>Reflections</>,
@@ -369,7 +387,16 @@ export const categories: ({
 			Reflect on the insights or realizations gained from your psychosis.
 			Describe the lessons learned, personal growth, or changes in perspective.
 		</>,
-		hex: '#689f38'
+		hex: '#689f38',
+		meta: {
+			type: 'reflections',
+			values: [
+				{
+					title: 'My realization',
+					description: 'I realize that I am a human, but when it comes to my psychosis where I have to beat the devil, I know how to act like the God of Gods, and I know for sure that the Gods know me for my deeds.'
+				}
+			]
+		}
 	},
 	{
 		title: <>Transitions</>,
@@ -379,7 +406,16 @@ export const categories: ({
 			Detail the transitions or shifts between different states of mind or realities.
 			These could include moments of clarity, confusion, or changes in perception.
 		</>,
-		hex: '#c2185b'
+		hex: '#c2185b',
+		meta: {
+			type: 'transitions',
+			values: [
+				{
+					title: 'My misery',
+					description: 'Even though I am a miserable person, with an extremely tough life of no chances at all to express my talents to my maximum potential, I know for sure that the Gods have seen me and recognized me, so I am not afraid for the afterlife.'
+				}
+			]
+		}
 	}
 ]
 
@@ -547,7 +583,59 @@ export default class App extends React.Component<any, AppState> {
 																</div>
 															</div>
 														))
-														: <></>
+														: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'thresholds'
+															? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+																<div className="category-thresholds" style={{
+																	background: v.hex
+																}}>
+																	<div className="category-thresholds-title">
+																		{v.title}
+																	</div>
+																	<div className="category-thresholds-description">
+																		{v.description}
+																	</div>
+																</div>
+															))
+															: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'symbols'
+																? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+																	<div className="category-symbols" style={{
+																		background: v.hex
+																	}}>
+																		<div className="category-symbols-title">
+																			{v.title}
+																		</div>
+																		<div className="category-symbols-description">
+																			{v.description}
+																		</div>
+																	</div>
+																))
+																: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'reflections'
+																	? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+																		<div className="category-reflections" style={{
+																			background: v.hex
+																		}}>
+																			<div className="category-reflections-title">
+																				{v.title}
+																			</div>
+																			<div className="category-reflections-description">
+																				{v.description}
+																			</div>
+																		</div>
+																	))
+																	: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'transitions'
+																		? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+																			<div className="category-transitions" style={{
+																				background: v.hex
+																			}}>
+																				<div className="category-transitions-title">
+																					{v.title}
+																				</div>
+																				<div className="category-transitions-description">
+																					{v.description}
+																				</div>
+																			</div>
+																		))
+																		: <></>
 							}
 					</div>
 				}
