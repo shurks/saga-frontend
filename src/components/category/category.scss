@@ -62,6 +62,7 @@
             .category {
                 &.big-icon {
                     width: 350px;
+                    margin: 0 auto;
                     .category-inner-icon {
                         position: relative;
                         @include pc {

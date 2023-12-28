@@ -56,6 +56,10 @@
                         padding-top: 25px;
                     }
 
+                    @include mobile {
+                        padding-top: 25px;
+                    }
+
                     &-title {
                         text-align: center;
                         color: #eee;
