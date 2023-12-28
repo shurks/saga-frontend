@@ -13,6 +13,7 @@ import DoorFrontIcon from '@mui/icons-material/DoorFront'
 import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import classNames from 'classnames'
 
 export interface AppState {
 	categoryId: string | null,
@@ -164,29 +165,51 @@ export default class App extends React.Component<any, AppState> {
 						<img src={AppLogo} alt="Logo" />
 					</div>
 				</div>
-				<div className="app-content">
-					{
-						categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
-							? (
-								<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
-									this.setState({
-										categoryId: this.state.categoryId === String(i) ? null : String(i),
-										animating: true,
-										page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
-									}, () => {
-										setTimeout(() => {
-											this.setState({
-												animating: false,
-												page: this.state.categoryId === null
-													? { type: 'menu' }
-													: { type: 'category', id: String(i), index: i }
-											})
-										}, 500)
-									})
-								}} />
+				<div className={classNames({
+					'app-content': true,
+					'category': this.state.page.type === 'category'
+				})} style={{
+					...this.state.page.type === 'category'
+						? {
+							'--primary-color': categories.filter((v, i) => String(i) === this.state.categoryId)[0].hex
+						}
+						: {}
+				} as React.CSSProperties}>
+					<div className="app-content-left">
+						{
+							categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
+								? (
+									<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
+										this.setState({
+											categoryId: this.state.categoryId === String(i) ? null : String(i),
+											animating: true,
+											page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
+										}, () => {
+											setTimeout(() => {
+												this.setState({
+													animating: false,
+													page: this.state.categoryId === null
+														? { type: 'menu' }
+														: { type: 'category', id: String(i), index: i }
+												})
+											}, 500)
+										})
+									}} />
+								)
+								: null
 							)
-							: null
-						)
+						}
+					</div>
+					{
+						this.state.page.type === 'category'
+						&& <div className="app-content-right">
+							<div className="app-content-right-title">
+								{categories.find((v, i) => String(i) === this.state.categoryId)?.title || 'Unknown'}
+							</div>
+							<div className="app-content-right-description">
+								{categories.find((v, i) => String(i) === this.state.categoryId)?.description || 'Unknown'}
+							</div>
+						</div>
 					}
 				</div>
 			</div>
