@@ -85,6 +85,11 @@ export const categories: ({
 				name: 'An unknown holy man of the highest holiness',
 				description: 'This is a man who showed me miracles I can\'t even comprehend, I have witnessed what it is like to be in a different reality where there is no physics, and he kept me there just to keep me safe. As he does not want someone as pure as myself to be destructed by evil and chaos.',
 				mentions: 1
+			},
+			{
+				name: 'All the girls I get a crush on',
+				description: 'Whenever I get a crush on a girl, there are voices in my head with their actual voice telling me to do stuff like masturbate and whatsoever, which does not align at all with what they are saying and doing in real life. It is a trap to feel bad about treating a girl you like like that by demons.',
+				mentions: 2
 			}
 		]
 	},
