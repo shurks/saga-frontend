@@ -13,7 +13,7 @@ import DoorFrontIcon from '@mui/icons-material/DoorFront'
 import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import EmailIcon from '@mui/icons-material/Email'
+import DownloadIcon from '@mui/icons-material/Download'
 import classNames from 'classnames'
 
 export interface AppState {
@@ -167,8 +167,20 @@ export const categories: ({
 					description: 'Todo'
 				},
 				{
+					title: 'Feeling satanic forces in my home and not daring to go in',
+					description: 'Todo'
+				},
+				{
 					title: "Staring the ultimate doom in the eyes",
 					description: "Todo"
+				},
+				{
+					title: 'I went back home and went back to gaming',
+					description: 'Todo'
+				},
+				{
+					title: 'I decided to work on a cure for schizophrenia',
+					description: 'Todo'
 				}
 			]
 		}
@@ -212,7 +224,36 @@ export const categories: ({
 			Reflect on the significant journeys or transformations you've experienced within your psychosis.
 			These could include emotional, mental, or even physical journeys you've undergone.
 		</>,
-		hex: '#f3a33b'
+		hex: '#f3a33b',
+		meta: {
+			type: 'journeys',
+			values: [
+				{
+					title: 'Deciding to rather be happy and have pain later in hell if it would come',
+					description: 'Todo'
+				},
+				{
+					title: 'Trying to get back to my carreer, but failing due to all the medication',
+					description: 'Todo'
+				},
+				{
+					title: 'Sleeping in front of the police office on my birthday to share my story',
+					description: 'Todo'
+				},
+				{
+					title: 'Running through a bridge of demons without any fear and dissing them',
+					description: 'Todo'
+				},
+				{
+					title: 'Getting back to my useless life of gaming and no family or luxury',
+					description: 'Todo'
+				},
+				{
+					title: 'Regaining my friends at last',
+					description: 'Todo'
+				}
+			]
+		}
 	},
 	{
 		title: <>Guides</>,
@@ -223,7 +264,32 @@ export const categories: ({
 			These guides could represent knowledge, support, or conflicting influences
 			that shape your perceptions or actions.
 		</>,
-		hex: '#4caf50'
+		hex: '#4caf50',
+		meta: {
+			type: 'guides',
+			values: [
+				{
+					name: 'The holy father (The God of Love)',
+					description: 'God of the bible, he always kept testing me for my ability to love like him. He always wanted the best for everyone. He told me alot about things like the Bible and why they were said in these ways back in the year 0000. He is the main influence of all the God\'s who recognized me for my ability to bring harmony to all God\'s in existence.'
+				},
+				{
+					name: 'My grandmother (The God Of Confusion)',
+					description: 'My grandmother sometimes pops into my head, explaining why it was necessary to confuse me into doing something onorthodox, which usually ends up in a logical explanation for why I did it. The confusion made me realize what was wrong with the connection between all God\'s and that we need to collaborate so we don\'t end up destructed. However, I also found out that destiny decides that I will become invincible in my quest of keeping the order of the God\'s stable, so there is no way out.'
+				},
+				{
+					name: 'An unknown holy man of the highest holiness',
+					description: 'This is a man who showed me miracles I can\'t even comprehend, I have witnessed what it is like to be in a different reality where there is no physics, and he kept me there just to keep me safe. As he does not want someone as pure as myself to be destructed by evil and chaos.'
+				},
+				{
+					name: 'My imaginary girlfriend',
+					description: 'Feeling loved is really important, even when it is makebelieve, it helped me through tought times believing someone still loved me.'
+				},
+				{
+					name: 'Mother nature / intuition / following your heart',
+					description: 'Following the voice of nature or intuition or my heart always makes me take the right decisions in times where it seems like all is doomed, and I always end up good whenever I listen to it automatically. Thank you mother nature, for being so kind.'
+				}
+			]
+		}
 	},
 	{
 		title: <>Conflicts</>,
@@ -399,7 +465,33 @@ export default class App extends React.Component<any, AppState> {
 												</div>
 											</div>
 										))
-										: <></>
+										: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'journeys'
+											? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+												<div className="category-journey" style={{
+													background: v.hex
+												}}>
+													<div className="category-journey-title">
+														{v.title}
+													</div>
+													<div className="category-journey-description">
+														{v.description}
+													</div>
+												</div>
+											))
+											: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'guides'
+												? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+													<div className="category-guides" style={{
+														background: v.hex
+													}}>
+														<div className="category-guides-title">
+															{v.name}
+														</div>
+														<div className="category-guides-description">
+															{v.description}
+														</div>
+													</div>
+												))
+												: <></>
 							}
 					</div>
 				}

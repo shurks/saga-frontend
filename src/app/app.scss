@@ -89,10 +89,10 @@
         .category-interpretation {
             color: #222!important;
             &-description {
-                font-weight: 600;
+                font-weight: 500!important;
             }
         }
-        .category-actor, .category-scenario, .category-interpretation {
+        .category-actor, .category-scenario, .category-interpretation, .category-journey, .category-guides {
             &:nth-child(2n) {
                 background: #2a2a2a;
             }
@@ -143,7 +143,7 @@
                 padding-bottom: 7px;
             }
 
-            &-relation-to {
+            &-relation-to, &-description {
                 font-size: 1.2em;
                 line-height: 1.5;
                 font-weight: 300;
