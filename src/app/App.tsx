@@ -175,31 +175,29 @@ export default class App extends React.Component<any, AppState> {
 						}
 						: {}
 				} as React.CSSProperties}>
-					<div className="app-content-left">
-						{
-							categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
-								? (
-									<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
-										this.setState({
-											categoryId: this.state.categoryId === String(i) ? null : String(i),
-											animating: true,
-											page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
-										}, () => {
-											setTimeout(() => {
-												this.setState({
-													animating: false,
-													page: this.state.categoryId === null
-														? { type: 'menu' }
-														: { type: 'category', id: String(i), index: i }
-												})
-											}, 500)
-										})
-									}} />
-								)
-								: null
+					{
+						categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
+							? (
+								<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
+									this.setState({
+										categoryId: this.state.categoryId === String(i) ? null : String(i),
+										animating: true,
+										page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
+									}, () => {
+										setTimeout(() => {
+											this.setState({
+												animating: false,
+												page: this.state.categoryId === null
+													? { type: 'menu' }
+													: { type: 'category', id: String(i), index: i }
+											})
+										}, 500)
+									})
+								}} />
 							)
-						}
-					</div>
+							: null
+						)
+					}
 					{
 						this.state.page.type === 'category'
 						&& <div className="app-content-right">
@@ -212,6 +210,12 @@ export default class App extends React.Component<any, AppState> {
 						</div>
 					}
 				</div>
+				{
+					this.state.page.type === 'category'
+					&& <div className="app-bottom">
+						Bottom	
+					</div>
+				}
 			</div>
 		)
 	}

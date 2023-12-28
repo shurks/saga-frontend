@@ -5,10 +5,20 @@
     position: relative;
     display: inline-block;
     width: 33.33%;
-    min-height: 300px;
+    @include pc {
+        min-height: 300px;
+    }
+    @include mobile {
+        min-height: 250px;
+    }
     padding: 5px;
     box-sizing: border-box;
     @include transition(all 0.5s ease-in-out);
+
+    @include mobile {
+        width: 100%;
+        display: block;
+    }
 
     &.fading {
         opacity: 0;
@@ -53,15 +63,24 @@
                 &.big-icon {
                     .category-inner-icon {
                         position: relative;
-                        height: 275px;
+                        @include pc {
+                            height: 275px;
+                        }
                         box-sizing: border-box;
                         svg {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            height: 200px;
-                            width: auto;
-                            @include transform(translate(-50%, -50%));
+                            @include mobile {
+                                height: 200px;
+                                width: auto;
+                            }
+
+                            @include pc {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                height: 200px;
+                                width: auto;
+                                @include transform(translate(-50%, -50%));
+                            }
                         }
                     }
                 }
@@ -71,7 +90,9 @@
                     border-radius: 10px;
                     text-align: center;
                     background: #efefef;
-                    height: 300px;
+                    @include pc {
+                        height: 300px;
+                    }
                     box-sizing: border-box;
             
                     @include box-shadow(-2px -2px 10px rgba(127, 127, 127, 0.15));
