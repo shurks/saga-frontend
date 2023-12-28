@@ -42,7 +42,7 @@ export const categories: ({
 		hex: '#4f85f8',
 		meta: [
 			{
-				name: 'Maxine',
+				name: 'Maxine (The Goddess of Chaos)',
 				description: 'My ex girlfriend from highschool, who apparantly sacrificed me to the devil as a witch, because she thinks that someone with the hardest life challenge and the most miserable person alive should also get the worst punishment imaginable by Satan, as that would be the ultimate deed of evil in her eyes.',
 				mentions: 6
 			},
@@ -64,6 +64,16 @@ export const categories: ({
 			{
 				name: 'Demons 1-3',
 				description: 'A group of demons disturbing me, sometimes claiming to be my old friends. Always trying to make me feel guilty about things I did wrong as a kid, and they try to pop hurtful thoughts in my head when I\'m with my friends and family so I feel bad.',
+				mentions: 1
+			},
+			{
+				name: 'My grandmother (The God Of Confusion)',
+				description: 'My grandmother sometimes pops into my head, explaining why it was necessary to confuse me into doing something onorthodox, which usually ends up in a logical explanation for why I did it.',
+				mentions: 2
+			},
+			{
+				name: 'My greatuncle (The God of Destruction)',
+				description: 'During one of the scenes I met my great uncle in my head, who told me that he is the God of Destruction, which is why all the Gods came to the conclusion that they need to collaborate to achieve harmony, as they each have a unique value.',
 				mentions: 1
 			}
 		]
