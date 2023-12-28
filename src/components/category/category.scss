@@ -61,6 +61,7 @@
         .cube {
             .category {
                 &.big-icon {
+                    width: 350px;
                     .category-inner-icon {
                         position: relative;
                         @include pc {
