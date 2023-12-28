@@ -299,7 +299,16 @@ export const categories: ({
 			Detail the conflicts or inner struggles you've faced during your experiences.
 			These could involve dilemmas, contradictions, or battles within your mind or reality.
 		</>,
-		hex: '#e53935'
+		hex: '#e53935',
+		meta: {
+			type: 'conflicts',
+			values: [
+				{
+					title: "Thinking of going down as the Anti-christ",
+					description: "They tried to convince me that as I am Jesus, that I would go down in the books as even worse as the anti-christ together with the holy father. This is where I did not know anymore what to do, as it was very convincing. But eventually I ended up going to the police, as I knew they stand for justice and not for love or hate. However, at the time, it did make me realize that even the anti-christ could have some reasoning behind his madness."
+				}
+			]
+		}
 	},
 	{
 		title: <>Visions</>,
@@ -491,7 +500,20 @@ export default class App extends React.Component<any, AppState> {
 														</div>
 													</div>
 												))
-												: <></>
+												: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'conflicts'
+													? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+														<div className="category-conflicts" style={{
+															background: v.hex
+														}}>
+															<div className="category-conflicts-title">
+																{v.title}
+															</div>
+															<div className="category-conflicts-description">
+																{v.description}
+															</div>
+														</div>
+													))
+													: <></>
 							}
 					</div>
 				}
