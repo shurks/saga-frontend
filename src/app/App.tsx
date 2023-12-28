@@ -13,6 +13,7 @@ import DoorFrontIcon from '@mui/icons-material/DoorFront'
 import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import EmailIcon from '@mui/icons-material/Email'
 import classNames from 'classnames'
 
 export interface AppState {
@@ -22,13 +23,14 @@ export interface AppState {
 		| { type: 'category', id: string, index: number }
 }
 
-export const categories: {
+export const categories: ({
 	title: JSX.Element
 	count: number
 	icon: JSX.Element
 	description: JSX.Element
 	hex: string
-}[] = [
+	meta?: Array<Record<string, any>>
+})[] = [
 	{
 		title: <>Actors</>,
 		count: 7,
@@ -37,7 +39,34 @@ export const categories: {
 			Write about the characters that play roles within your psychosis, describe their personalities,
 			their role in your life from before, what they want to do to make you unhappy, and more!
 		</>,
-		hex: '#4f85f8'
+		hex: '#4f85f8',
+		meta: [
+			{
+				name: 'Maxine',
+				description: 'My ex girlfriend from highschool, who apparantly sacrificed me to the devil as a witch, because she thinks that someone with the hardest life challenge and the most miserable person alive should also get the worst punishment imaginable by Satan, as that would be the ultimate deed of evil in her eyes.',
+				mentions: 6
+			},
+			{
+				name: 'Mark',
+				description: 'My best friend who I speak to daily, but keeps telling me stuff about my doom. In my psychosis I have also met him as the "endboss" of evil, as they like to call it.',
+				mentions: 7
+			},
+			{
+				name: 'The holy father',
+				description: 'God of the bible, sometimes on my side, sometimes on the enemies.',
+				mentions: 12
+			},
+			{
+				name: 'Satan',
+				description: 'Master of deception and lies. Can never be trusted. For some time I thought it was my dad, because my mother called him that alot when I was younger, but I realize this is not the truth.',
+				mentions: 12
+			},
+			{
+				name: 'Demons 1-3',
+				description: 'A group of demons disturbing me, sometimes claiming to be my old friends. Always trying to make me feel guilty about things I did wrong as a kid, and they try to pop hurtful thoughts in my head when I\'m with my friends and family so I feel bad.',
+				mentions: 1
+			}
+		]
 	},
 	{
 		title: <>Scenarios</>,
@@ -58,6 +87,17 @@ export const categories: {
 			with the given color, to give the reader a sense of understanding your story.
 		</>,
 		hex: '#4B0082'
+	},
+	{
+		title: <>Blackmail</>,
+		count: 5,
+		icon: <EmailIcon />,
+		description: <>
+			Are you shameful for your past sins as a child or things like that, and are the voices in your head
+			playing in on this? Try to forget about it, write it down and don't be ashamed, you will stay
+			anonymous here.
+		</>,
+		hex: '#333333'
 	},
 	{
 		title: <>Journeys</>,
@@ -212,8 +252,28 @@ export default class App extends React.Component<any, AppState> {
 				</div>
 				{
 					this.state.page.type === 'category'
+					&& (categories.find((v, i) => String(i) === this.state.categoryId))
 					&& <div className="app-bottom">
-						Bottom	
+						{
+							categories.find((v, i) => String(i) === this.state.categoryId)
+							?.meta?.map((v) => (
+								<div className="category-actor">
+									<div className="category-actor-left">
+										<div className="category-actor-left-table">
+											<div className="category-actor-left-table-title">
+												{v.name}
+											</div>
+											<div className="category-actor-left-table-relation-to">
+												{v.description}
+											</div>
+										</div>
+									</div>
+									<div className="category-actor-right">
+										{v.mentions} mentions
+									</div>
+								</div>
+							))
+						}
 					</div>
 				}
 			</div>

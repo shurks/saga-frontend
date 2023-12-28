@@ -24,6 +24,8 @@ interface CategoryState {
 }
 
 export default class Category extends React.Component<CategoryProps, CategoryState> {
+    public containerRef!: React.RefObject<HTMLDivElement>
+    
     constructor(props: any) {
         super(props)
         this.state = {
@@ -42,7 +44,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                 'category-container': true,
                 'fading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'menu',
                 'unfading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'category'
-            })} style={{
+            })} ref={this.containerRef} style={{
                 '--primary-color': this.props.category.hex,
                 transform: this.props.page.type === 'menu'
                     ? this.props.selected !== this.props.id && this.props.animating

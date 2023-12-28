@@ -84,4 +84,50 @@
             }
         }
     }
+
+    &-bottom {
+        .category-actor {
+            &:nth-child(2n) {
+                background: #2a2a2a;
+            }
+
+            background: #333;
+            color: #efefef;
+            padding: 20px 15px;
+
+            &-left, &-right {
+                display: inline-block;
+                vertical-align: middle;
+                box-sizing: border-box;
+            }
+
+            &-left {
+                width: calc(100% - 100px);
+                padding-right: 10px;           
+                &-table {
+                    display: table;
+                    width: 100%;
+                    table-layout: auto;
+                    border-collapse: collapse;
+
+                    &-title {
+                        font-size: 1.4em;
+                        font-weight: 500;
+                        padding-bottom: 7px;
+                    }
+
+                    &-relation-to {
+                        font-size: 1em;
+                        font-weight: 300;
+                    }
+                }
+            }
+
+            &-right {
+                width: 100px;
+                vertical-align: middle;
+                text-align: right;
+            }
+        }
+    }
 }
