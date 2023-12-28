@@ -86,7 +86,13 @@
     }
 
     &-bottom {
-        .category-actor, .category-scenario {
+        .category-interpretation {
+            color: #222!important;
+            &-description {
+                font-weight: 600;
+            }
+        }
+        .category-actor, .category-scenario, .category-interpretation {
             &:nth-child(2n) {
                 background: #2a2a2a;
             }

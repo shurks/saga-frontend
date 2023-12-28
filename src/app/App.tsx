@@ -139,11 +139,19 @@ export const categories: ({
 					description: "Todo"
 				},
 				{
-					title: "Staring the ultimate doom in the eyes",
+					title: "Living on the streets with no option but to accept help to get a roof over my head",
 					description: "Todo"
 				},
 				{
-					title: "Getting tortured by the police",
+					title: "Spending alot of time in mental hospitals",
+					description: "Todo"
+				},
+				{
+					title: "Giving up on life and just kept gaming",
+					description: "Todo"
+				},
+				{
+					title: "Getting lynched by the holy father",
 					description: "Todo"
 				},
 				{
@@ -151,7 +159,15 @@ export const categories: ({
 					description: "Todo"
 				},
 				{
-					title: "Getting lynched by the holy father",
+					title: 'Seeing demons trying to take over our kind in sudden places',
+					description: 'Todo'
+				},
+				{
+					title: 'Following my destiny',
+					description: 'Todo'
+				},
+				{
+					title: "Staring the ultimate doom in the eyes",
 					description: "Todo"
 				}
 			]
@@ -165,18 +181,28 @@ export const categories: ({
 			Define the colors that represent a way to interpret something in your story that is highlighted
 			with the given color, to give the reader a sense of understanding your story.
 		</>,
-		hex: '#4B0082'
-	},
-	{
-		title: <>Blackmail</>,
-		count: 5,
-		icon: <EmailIcon />,
-		description: <>
-			Are you shameful for your past sins as a child or things like that, and are the voices in your head
-			playing in on this? Try to forget about it, write it down and don't be ashamed, you will stay
-			anonymous here.
-		</>,
-		hex: '#333333'
+		hex: '#4B0082',
+		meta: {
+			type: 'interpretation',
+			values: [
+				{
+					hex: '#03c2fc',
+					description: 'The things we currently see as part of religion and God\'s will.'
+				},
+				{
+					hex: '#05eb4a',
+					description: 'The things we are doing correctly, based on the actual world views'
+				},
+				{
+					hex: '#ee7dff',
+					description: 'The introduction of what I see as an actual God logically reasoning'
+				},
+				{
+					hex: '#ebe305',
+					description: 'The things we do wrong, based on our confusion that is caused by listening to the wrong story of the Gods over the years.'
+				}
+			]
+		}
 	},
 	{
 		title: <>Journeys</>,
@@ -363,7 +389,17 @@ export default class App extends React.Component<any, AppState> {
 											</div>
 										</div>
 									))
-									: <></>
+									: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'interpretation'
+										? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+											<div className="category-interpretation" style={{
+												background: v.hex
+											}}>
+												<div className="category-interpretation-description">
+													{v.description}
+												</div>
+											</div>
+										))
+										: <></>
 							}
 					</div>
 				}
