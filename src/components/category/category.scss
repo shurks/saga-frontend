@@ -121,7 +121,7 @@
                             font-weight: 600;
                             color: #fff;
                             @include transition(all 0.3s ease-in-out);
-                            @include transform(translate(30px, 0) scale(0.75));
+                            @include transform(translate(50px, 0) scale(0.75));
                         }
                     }
             
