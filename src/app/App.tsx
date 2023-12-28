@@ -29,7 +29,7 @@ export const categories: ({
 	icon: JSX.Element
 	description: JSX.Element
 	hex: string
-	meta?: Array<Record<string, any>>
+	meta?: { type: string, values: Array<Record<string, any>> }
 })[] = [
 	{
 		title: <>Actors</>,
@@ -40,58 +40,61 @@ export const categories: ({
 			their role in your life from before, what they want to do to make you unhappy, and more!
 		</>,
 		hex: '#4f85f8',
-		meta: [
-			{
-				name: 'Maxine (The Goddess of Chaos)',
-				description: 'My ex girlfriend from highschool, who apparantly sacrificed me to the devil as a witch, because she thinks that someone with the hardest life challenge and the most miserable person alive should also get the worst punishment imaginable by Satan, as that would be the ultimate deed of evil in her eyes.',
-				mentions: 6
-			},
-			{
-				name: 'Mark',
-				description: 'My best friend who I speak to daily, but keeps telling me stuff about my doom. In my psychosis I have also met him as the "endboss" of evil, as they like to call it.',
-				mentions: 7
-			},
-			{
-				name: 'The holy father (The God of Love)',
-				description: 'God of the bible, sometimes on my side, sometimes on the enemies.',
-				mentions: 12
-			},
-			{
-				name: 'Satan (The God of Evil)',
-				description: 'Master of deception and lies. Can never be trusted. For some time I thought it was my dad, because my mother called him that alot when I was younger, but I realize this is not the truth.',
-				mentions: 12
-			},
-			{
-				name: 'Demons 1-3',
-				description: 'A group of demons disturbing me, sometimes claiming to be my old friends. Always trying to make me feel guilty about things I did wrong as a kid, and they try to pop hurtful thoughts in my head when I\'m with my friends and family so I feel bad.',
-				mentions: 1
-			},
-			{
-				name: 'My grandmother (The God Of Confusion)',
-				description: 'My grandmother sometimes pops into my head, explaining why it was necessary to confuse me into doing something onorthodox, which usually ends up in a logical explanation for why I did it.',
-				mentions: 2
-			},
-			{
-				name: 'My greatuncle (The God of Destruction)',
-				description: 'During one of the scenes I met my great uncle in my head, who told me that he is the God of Destruction, which is why all the Gods came to the conclusion that they need to collaborate to achieve harmony, as they each have a unique value.',
-				mentions: 1
-			},
-			{
-				name: 'My father (The God of Justice) and his wife',
-				description: 'My father and his wife are sometimes as voices on the background to judge me, because they supposedly have secret plans with me. However, I believe these are just demons using their voices.',
-				mentions: 3
-			},
-			{
-				name: 'An unknown holy man of the highest holiness',
-				description: 'This is a man who showed me miracles I can\'t even comprehend, I have witnessed what it is like to be in a different reality where there is no physics, and he kept me there just to keep me safe. As he does not want someone as pure as myself to be destructed by evil and chaos.',
-				mentions: 1
-			},
-			{
-				name: 'All the girls I get a crush on',
-				description: 'Whenever I get a crush on a girl, there are voices in my head with their actual voice telling me to do stuff like masturbate and whatsoever, which does not align at all with what they are saying and doing in real life. It is a trap to feel bad about treating a girl you like like that by demons.',
-				mentions: 2
-			}
-		]
+		meta: {
+			type: 'actor',
+			values: [
+				{
+					name: 'Maxine (The Goddess of Chaos)',
+					description: 'My ex girlfriend from highschool, who apparantly sacrificed me to the devil as a witch, because she thinks that someone with the hardest life challenge and the most miserable person alive should also get the worst punishment imaginable by Satan, as that would be the ultimate deed of evil in her eyes.',
+					mentions: 6
+				},
+				{
+					name: 'Mark',
+					description: 'My best friend who I speak to daily, but keeps telling me stuff about my doom. In my psychosis I have also met him as the "endboss" of evil, as they like to call it.',
+					mentions: 7
+				},
+				{
+					name: 'The holy father (The God of Love)',
+					description: 'God of the bible, sometimes on my side, sometimes on the enemies.',
+					mentions: 12
+				},
+				{
+					name: 'Satan (The God of Evil)',
+					description: 'Master of deception and lies. Can never be trusted. For some time I thought it was my dad, because my mother called him that alot when I was younger, but I realize this is not the truth.',
+					mentions: 12
+				},
+				{
+					name: 'Demons 1-3',
+					description: 'A group of demons disturbing me, sometimes claiming to be my old friends. Always trying to make me feel guilty about things I did wrong as a kid, and they try to pop hurtful thoughts in my head when I\'m with my friends and family so I feel bad.',
+					mentions: 1
+				},
+				{
+					name: 'My grandmother (The God Of Confusion)',
+					description: 'My grandmother sometimes pops into my head, explaining why it was necessary to confuse me into doing something onorthodox, which usually ends up in a logical explanation for why I did it.',
+					mentions: 2
+				},
+				{
+					name: 'My greatuncle (The God of Destruction)',
+					description: 'During one of the scenes I met my great uncle in my head, who told me that he is the God of Destruction, which is why all the Gods came to the conclusion that they need to collaborate to achieve harmony, as they each have a unique value.',
+					mentions: 1
+				},
+				{
+					name: 'My father (The God of Justice) and his wife',
+					description: 'My father and his wife are sometimes as voices on the background to judge me, because they supposedly have secret plans with me. However, I believe these are just demons using their voices.',
+					mentions: 3
+				},
+				{
+					name: 'An unknown holy man of the highest holiness',
+					description: 'This is a man who showed me miracles I can\'t even comprehend, I have witnessed what it is like to be in a different reality where there is no physics, and he kept me there just to keep me safe. As he does not want someone as pure as myself to be destructed by evil and chaos.',
+					mentions: 1
+				},
+				{
+					name: 'All the girls I get a crush on',
+					description: 'Whenever I get a crush on a girl, there are voices in my head with their actual voice telling me to do stuff like masturbate and whatsoever, which does not align at all with what they are saying and doing in real life. It is a trap to feel bad about treating a girl you like like that by demons.',
+					mentions: 2
+				}
+			]
+		}
 	},
 	{
 		title: <>Scenarios</>,
@@ -280,25 +283,26 @@ export default class App extends React.Component<any, AppState> {
 					&& (categories.find((v, i) => String(i) === this.state.categoryId))
 					&& <div className="app-bottom">
 						{
-							categories.find((v, i) => String(i) === this.state.categoryId)
-							?.meta?.map((v) => (
-								<div className="category-actor">
-									<div className="category-actor-left">
-										<div className="category-actor-left-table">
-											<div className="category-actor-left-table-title">
-												{v.name}
-											</div>
-											<div className="category-actor-left-table-relation-to">
-												{v.description}
+							categories.find((v, i) => String(i) === this.state.categoryId)?.meta?.type === 'actor'
+								? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+									<div className="category-actor">
+										<div className="category-actor-left">
+											<div className="category-actor-left-table">
+												<div className="category-actor-left-table-title">
+													{v.name}
+												</div>
+												<div className="category-actor-left-table-relation-to">
+													{v.description}
+												</div>
 											</div>
 										</div>
+										<div className="category-actor-right">
+											{v.mentions} mentions
+										</div>
 									</div>
-									<div className="category-actor-right">
-										{v.mentions} mentions
-									</div>
-								</div>
-							))
-						}
+								))
+								: <></>
+							}
 					</div>
 				}
 			</div>
