@@ -132,55 +132,64 @@ export const categories: ({
 				},
 				{
 					title: "People rooting against me",
-					description: "Todo"
+					description: <>
+						<p>
+							When I was walking the streets towards my mother, for a safehouse, people were disgusted by me for some reason. The military was all around the streets,
+							and I did not feel safe anywhere. Luckily my mom gave me shelter for a day, before I went on to continue my life.
+						</p>
+					</>
 				},
 				{
 					title: "Believing Maxine was a God and wanted to torture me",
-					description: "Todo"
+					description: <>
+						<p>
+							When the psychosis first happened for the first few times, I was convinced that my ex Maxine was a witch who convinced me of being a Goddess as well, who could destroy me.
+							Everything she said, she claimed that it would become the reality. But it only made me laugh, I can not see why I would believe such a thing. But back then I was quite scared of the
+							impact that those sayings made to me.
+						</p>
+					</>
 				},
 				{
 					title: "Living on the streets with no option but to accept help to get a roof over my head",
-					description: "Todo"
+					description: <>
+						<p>
+							When I lived in Tilburg, and I got bullied out of my city, I had no choice but to live on the streets, until my dad offered me a house to live in.
+							Only downside was that it forced me to accept support from social workers, which I did not need, and which I am still stuck with until this day.
+						</p>
+					</>
 				},
 				{
 					title: "Spending alot of time in mental hospitals",
-					description: "Todo"
+					description: <>
+						<p>
+							Everytime I tried to quit the medication for antipsychotics, it went very wrong, and I had to spent alot of time in mental hospitals because of that.
+						</p>
+					</>
 				},
 				{
 					title: "Giving up on life and just kept gaming",
-					description: "Todo"
+					description: <>
+						<p>
+							Not much to say about this, I just kept playing Oldschool Runescape, in which I became a top 250 player.
+						</p>
+					</>
 				},
 				{
 					title: "Getting lynched by the holy father",
-					description: "Todo"
+					description: <>
+						<p>
+							Eventually, I thought that I was being lynched by the holy father, after sleeping on the streets on my 27th birthday, but I went home and nothing happened.
+						</p>
+					</>
 				},
 				{
 					title: "Finding Gods and being declared the God of Gods",
-					description: "Todo"
-				},
-				{
-					title: 'Seeing demons trying to take over our kind in sudden places',
-					description: 'Todo'
-				},
-				{
-					title: 'Following my destiny',
-					description: 'Todo'
-				},
-				{
-					title: 'Feeling satanic forces in my home and not daring to go in',
-					description: 'Todo'
-				},
-				{
-					title: "Staring the ultimate doom in the eyes",
-					description: "Todo"
-				},
-				{
-					title: 'I went back home and went back to gaming',
-					description: 'Todo'
-				},
-				{
-					title: 'I decided to work on a cure for schizophrenia',
-					description: 'Todo'
+					description: <>
+						<p>
+							It is a long story, but seeing that the devil kept coming up with Godly intelligence to try to torture me, I had no other option but to do the same.
+							And it convinced the Gods that I was the string that kept them together, which earned me the title of the God of Gods in their eyes metaphorically or realistically, I don't know.
+						</p>
+					</>
 				}
 			]
 		}
@@ -230,27 +239,36 @@ export const categories: ({
 			values: [
 				{
 					title: 'Deciding to rather be happy and have pain later in hell if it would come',
-					description: 'Todo'
+					description: <>
+						<p>
+							At first, it made sense to me to rather enjoy life, than to fear the afterlife every day.
+						</p>
+					</>
 				},
 				{
 					title: 'Trying to get back to my carreer, but failing due to all the medication',
-					description: 'Todo'
+					description: <>
+						<p>
+							I tried getting back at my carreer, but because of the medication, I had to take drugs to perform and it got me fired.
+						</p>
+					</>
 				},
 				{
 					title: 'Sleeping in front of the police office on my birthday to share my story',
-					description: 'Todo'
+					description: <>
+						<p>
+							On my 27th birthday, I slept in front of the police office, because they would not take me serious for my complaint against my human rights, just because I was a junky in their eyes.
+						</p>
+					</>
 				},
 				{
 					title: 'Running through a bridge of demons without any fear and dissing them',
-					description: 'Todo'
-				},
-				{
-					title: 'Getting back to my useless life of gaming and no family or luxury',
-					description: 'Todo'
-				},
-				{
-					title: 'Regaining my friends at last',
-					description: 'Todo'
+					description: <>
+						<p>
+							This is one of the things I believed, in Vught everyone was a demon, but in Den Bosch everyone was a saint. Some crazy things happened here, and it was an adventure to live it.
+							I stood in Den Bosch as a fucking gangster and nobody dared to fuck with me, it was an amazing feeling. I totally took back the hood from that bitch Maxine.
+						</p>
+					</>
 				}
 			]
 		}
