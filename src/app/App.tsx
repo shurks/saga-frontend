@@ -104,7 +104,58 @@ export const categories: ({
 			What scenarios have you encountered that were scary to you, or perhaps unexplainable?
 			Think about all the scenarios you have witnessed, for the most accurate story.
 		</>,
-		hex: '#8a30cf'
+		hex: '#8a30cf',
+		meta: {
+			type: 'scenario',
+			values: [
+				{
+					title: "Hearing voices for the first time",
+					description: <>
+						<p>
+							When I heard voices for the first time, it was very scary. It was something I have never experienced before and I freaked out.
+							The voices told me to commit suicide within 24 hours or they would kill me and torture me so I wish I did it. I felt like I had no other
+							choice, I tried jumping off my balcony, but I was too scared. Eventually I bought a bottle of whiskey and drank it within 1 minute fully,
+							after which I woke up 3 days later in black puke being unable to swallow anything but soup.
+						</p>
+					</>
+				},
+				{
+					title: "Getting bullied out of Tilburg",
+					description: <>
+						<p>
+							After a Moroccan man, who was my dealer, came by to give me some stuff, he robbed me for my last 5.000 euros. I called the police for that,
+							and it ended up in a ghetto scene on the streets, where I couldn't get near my house anymore. I must have been in a fake reality, because there
+							were only germans and weird people who suddenly had access to my appartment. I walked for 3 days until my dad found me and brought me to the doctor,
+							for the legs I could barely still stand on, while voices told me I was in hell and my dad was the super devil.
+						</p>
+					</>
+				},
+				{
+					title: "People rooting against me",
+					description: "Todo"
+				},
+				{
+					title: "Believing Maxine was a God and wanted to torture me",
+					description: "Todo"
+				},
+				{
+					title: "Staring the ultimate doom in the eyes",
+					description: "Todo"
+				},
+				{
+					title: "Getting tortured by the police",
+					description: "Todo"
+				},
+				{
+					title: "Finding Gods and being declared the God of Gods",
+					description: "Todo"
+				},
+				{
+					title: "Getting lynched by the holy father",
+					description: "Todo"
+				}
+			]
+		}
 	},
 	{
 		title: <>Interpretation</>,
@@ -301,7 +352,18 @@ export default class App extends React.Component<any, AppState> {
 										</div>
 									</div>
 								))
-								: <></>
+								: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'scenario'
+									? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+										<div className="category-scenario">
+											<div className="category-scenario-title">
+												{v.title}
+											</div>
+											<div className="category-scenario-relation-to">
+												{v.description}
+											</div>
+										</div>
+									))
+									: <></>
 							}
 					</div>
 				}
