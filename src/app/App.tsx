@@ -75,6 +75,10 @@ export const categories: ({
 				name: 'My greatuncle (The God of Destruction)',
 				description: 'During one of the scenes I met my great uncle in my head, who told me that he is the God of Destruction, which is why all the Gods came to the conclusion that they need to collaborate to achieve harmony, as they each have a unique value.',
 				mentions: 1
+			},
+			{
+				name: 'My father (The God of Justice) and his wife',
+				description: 'My father and his wife are sometimes as voices on the background to judge me, because they supposedly have secret plans with me. However, I believe these are just demons using their voices.'
 			}
 		]
 	},
