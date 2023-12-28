@@ -318,7 +318,28 @@ export const categories: ({
 			Explore the visions or hallucinations you've encountered in your psychosis.
 			Describe the sights, sounds, or other sensory experiences that felt vivid or surreal.
 		</>,
-		hex: '#7e57c2'
+		hex: '#7e57c2',
+		meta: {
+			type: 'visions',
+			values: [
+				{
+					title: 'Seeing swords of infinte power',
+					description: 'The devil claimed that he would have a sword, which I saw entering my body almost, which on impact, would feel like an entire universe would explode on me. I was very scared at that time, but it never happened, and I can only see that it has been bluf all this time.'
+				},
+				{
+					title: 'Seeing the super devil',
+					description: 'Back when I was mad at God for not being able to sustain our society, and proving him that I would be worthy of a position like him, he sent the super devil to me. Which is probably makebelief, however I actually saw him in gruesome detail flying outside of my window. I had to overcome this fear.'
+				},
+				{
+					title: 'Seeing demons',
+					description: 'At some point, testing my psychosis to the extreme, I saw literal demons, and other people saw them too. But they were only visible on dark material, of which they could not leave. I could see them running, trying to get into my reality, but they could never get out of the black substances that they appeared on.'
+				},
+				{
+					title: 'Feeling stabbed',
+					description: 'Demons tried stabbing me, however I only felt it for a pinch, as their swords were pushed through me, it didn\'t bother me too much.' 
+				}
+			]
+		}
 	},
 	{
 		title: <>Thresholds</>,
@@ -513,7 +534,20 @@ export default class App extends React.Component<any, AppState> {
 															</div>
 														</div>
 													))
-													: <></>
+													: categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.type === 'visions'
+														? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.values.map((v) => (
+															<div className="category-visions" style={{
+																background: v.hex
+															}}>
+																<div className="category-visions-title">
+																	{v.title}
+																</div>
+																<div className="category-visions-description">
+																	{v.description}
+																</div>
+															</div>
+														))
+														: <></>
 							}
 					</div>
 				}
