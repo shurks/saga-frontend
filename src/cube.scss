@@ -1,0 +1,119 @@
+@import "./mixins.scss";
+
+$animationTime: 500ms;
+
+@include keyframes(cube-left-to-right-leave) {
+    0% {
+        @include transform(translateX(0%) rotateY(0deg));
+        opacity: 1;
+    }
+    100% {
+        @include transform(translateX(100%) rotateY(90deg));
+        opacity: 0;
+        background: rgba(#f7f7f7, 0.3);
+    }
+}
+
+@include keyframes(cube-left-to-right-enter) {
+    0% {
+        @include transform(translateX(-100%) rotateY(-90deg));
+        opacity: 0;
+        background: rgba(#f7f7f7, 0.3);
+    }
+    100% {
+        @include transform(translateX(0%) rotateY(0deg));
+        opacity: 1;
+    }
+}
+
+@include keyframes(cube-right-to-left-leave) {
+    0% {
+        @include transform(translateX(0%) rotateY(0deg));
+        opacity: 1;
+    }
+    100% {
+        @include transform(translateX(-100%) rotateY(-90deg));
+        opacity: 0;
+        background: rgba(#f7f7f7, 0.3);
+    }
+}
+
+@include keyframes(cube-right-to-left-enter) {
+    0% {
+        @include transform(translateX(100%) rotateY(90deg));
+        opacity: 0;
+        background: rgba(#f7f7f7, 0.3);
+    }
+    100% {
+        @include transform(translateX(0%) rotateY(0deg));
+        opacity: 1;
+    }
+}
+
+.animation-cube {
+
+    // Container perspective
+    @include perspective(1500px);
+
+    // Default style
+    .cube {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        @include transform-style(preserve-3d);
+        @include perspective(2000px);
+    }
+
+    &:not(.animation-cube-left-to-right):not(.animation-cube-right-to-left) {
+        .cube {
+            >*:not(.active) {
+                display: none;
+            }
+        }
+    }
+
+    &.animation-cube-left-to-right, &.animation-cube-right-to-left {
+        .cube {
+            >* {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    // Counter clockwise
+    &.animation-cube-left-to-right {
+        .cube {
+            >.active {
+                @include transform-origin(0% 50%);
+                @include animation(cube-left-to-right-leave $animationTime normal forwards ease-in-out);
+            }
+
+            >:not(.active) {
+                @include transform-origin(100% 50%);
+                @include animation(cube-left-to-right-enter $animationTime normal forwards ease-in-out);
+            }
+        }
+    }
+
+    // Clockwise
+    &.animation-cube-right-to-left {
+        .cube {
+            >.active {
+                @include transform-origin(100% 50%);
+                @include animation(cube-right-to-left-leave $animationTime normal forwards ease-in-out);
+            }
+
+            >:not(.active) {
+                @include transform-origin(0% 50%);
+                @include animation(cube-right-to-left-enter $animationTime normal forwards ease-in-out);
+            }
+        }
+    }
+}

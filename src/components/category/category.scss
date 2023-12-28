@@ -1,0 +1,206 @@
+@import "../../mixins.scss";
+@import "../../cube.scss";
+
+.category-container {
+    position: relative;
+    display: inline-block;
+    width: 33.33%;
+    min-height: 300px;
+    padding: 5px;
+    box-sizing: border-box;
+    @include transition(all 0.5s ease-in-out);
+
+    &.fading {
+        opacity: 0;
+    }
+
+    &.unfading {
+        opacity: 1;
+    }
+
+    .animation-cube {
+        &.animation-cube-left-to-right, &.animation-cube-right-to-left {
+            .category-inner {
+                background: var(--primary-color)!important;
+                @include transform(translate(5px, -5px) scale(0.90) !important);
+                @include box-shadow(-5px 5px 10px rgba(127, 127, 127, 0.2) !important);
+    
+                .category-inner-title {
+                    color: #efefef!important;
+    
+                    &-count {
+                        background: #efefef!important;
+                        color: var(--primary-color)!important;
+                    }
+                }
+    
+                .category-inner-icon {
+                    svg {
+                        color: #efefef!important;
+                    }
+                }
+    
+                .category-inner-description {
+                    color: #efefef!important;
+                    &::before, &::after {
+                        color: #fff!important;
+                    }
+                }
+            }
+        }
+        .cube {
+            .category {
+                &.big-icon {
+                    .category-inner-icon {
+                        position: relative;
+                        height: 275px;
+                        box-sizing: border-box;
+                        svg {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            height: 200px;
+                            width: auto;
+                            @include transform(translate(-50%, -50%));
+                        }
+                    }
+                }
+
+                &-inner {
+                    padding: 10px;
+                    border-radius: 10px;
+                    text-align: center;
+                    background: #efefef;
+                    height: 300px;
+                    box-sizing: border-box;
+            
+                    @include box-shadow(-2px -2px 10px rgba(127, 127, 127, 0.15));
+                    @include transition(all 0.3s ease-in-out);
+            
+                    &-title {
+                        position: relative;
+                        display: inline-block;
+                        padding: 10px 5px;
+                        font-size: 1.4em;
+                        font-weight: 500;
+                        text-align: center;
+                        color: #333;
+            
+                        @include transition(all 0.3s ease-in-out);
+            
+                        &-count {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            padding: 5px 12.5px;
+                            background: var(--primary-color);
+                            border-radius: 50%;
+                            font-weight: 600;
+                            color: #fff;
+                            @include transition(all 0.3s ease-in-out);
+                            @include transform(translate(30px, 0) scale(0.75));
+                        }
+                    }
+            
+                    &-icon {
+                        text-align: center;
+                        padding: 10px 0;
+                        svg {
+                            height: 100px;
+                            width: auto;
+                            color: var(--primary-color);
+                            @include transition(all 0.3s ease-in-out);
+                        }
+                    }
+                    
+                    &-description {
+                        quotes: "“" "”" "‘" "’";
+                        font-weight: 400;
+                        color: #555;
+                        line-height: 1.5;
+                        margin-top: 10px;
+                        @include transition(all 0.3s ease-in-out);
+            
+                        &::before, &::after {
+                            position: absolute;
+                            font-size: 2em;
+                            color: var(--primary-color);
+                            @include transition(all 0.3s ease-in-out);
+                        }
+                        &::before {
+                            @include transform(translate(-15px, -10px));
+                            content: open-quote;
+                        }
+                        &::after {
+                            @include transform(translate(5px, -6px));
+                            content: close-quote;
+                        }
+                    }
+            
+                    &.selected {
+                        @include box-shadow(none!important);
+                        @include transform(none!important);
+
+                        &:hover {
+                            background: #efefef;
+                            @include box-shadow(-5px 5px 10px rgba(127, 127, 127, 0.2));
+                            @include transform(translate(5px, -5px));
+                            cursor: pointer;
+
+                            .category-inner-title {
+                                color: #333;
+                
+                                &-count {
+                                    background: var(--primary-color);
+                                    color: #fff;
+                                }
+                            }
+                
+                            .category-inner-icon {
+                                svg {
+                                    color: var(--primary-color);
+                                }
+                            }
+                
+                            .category-inner-description {
+                                color: #555;
+                                &::before, &::after {
+                                    color: var(--primary-color);
+                                }
+                            }
+                        }
+                    }
+
+                    &:hover, &.selected {
+                        background: var(--primary-color);
+                        @include box-shadow(-5px 5px 10px rgba(127, 127, 127, 0.2));
+                        @include transform(translate(5px, -5px));
+                        cursor: pointer;
+            
+                        .category-inner-title {
+                            color: #efefef;
+            
+                            &-count {
+                                background: #efefef;
+                                color: var(--primary-color);
+                            }
+                        }
+            
+                        .category-inner-icon {
+                            svg {
+                                color: #efefef;
+                            }
+                        }
+            
+                        .category-inner-description {
+                            color: #efefef;
+                            &::before, &::after {
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

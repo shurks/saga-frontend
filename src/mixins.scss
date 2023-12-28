@@ -1,0 +1,178 @@
+@mixin placeholder() {
+    // Chrome/opera/safari
+    &::-webkit-input-placeholder {
+        @content;
+    }
+
+    // Firefox 19+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    // IE 10+
+    &:-ms-input-placeholder {
+        @content;
+    }
+
+    // Firefox 18-
+    &:-moz-placeholder {
+        @content;
+    }
+}
+
+@mixin grid() {
+    @include pc {
+        max-width: 1300px;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+
+    @include mobile {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+    }
+}
+
+@mixin perspective($property) {
+    -webkit-perspective: $property;
+    -moz-perspective: $property;
+    -o-perspective: $property;
+    perspective: $property;
+}
+
+@mixin transform($property) {
+    transform: $property;
+    -webkit-transform: $property;
+    -moz-transform: $property;
+    -ms-transform: $property;
+}
+
+@mixin transform-origin($property) {
+    transform-origin: $property;
+    -webkit-transform-origin: $property;
+    -moz-transform-origin: $property;
+    -ms-transform-origin: $property;
+}
+
+@mixin transform-style($property) {
+    transform-style: $property;
+    -webkit-transform-style: $property;
+    -moz-transform-style: $property;
+    -ms-transform-style: $property;
+}
+
+@mixin box-shadow($property) {
+    box-shadow: $property;
+    -webkit-box-shadow: $property;
+    -moz-box-shadow: $property;
+    -ms-box-shadow: $property;
+}
+
+@mixin user-select($property) {
+    user-select: $property;
+    -webkit-user-select: $property;
+    -moz-user-select: $property;
+    -ms-user-select: $property;
+}
+
+@mixin transition($property) {
+    transition: $property;
+    -webkit-transition: $property;
+    -moz-transition: $property;
+    -ms-transition: $property;
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@mixin animation($property) {
+    animation: $property;
+    -webkit-animation: $property;
+}
+
+@mixin selection() {
+    &::-moz-selection {
+        @content;
+    }
+    &::selection {
+        @content;
+    }
+}
+
+@mixin box-shadow($property) {
+    box-shadow: $property;
+    -moz-box-shadow: $property;
+    -webkit-box-shadow: $property;
+    -ms-box-shadow: $property;
+}
+
+@mixin mobile() {
+    @media (max-width: 999px) {
+        @content;
+    }
+}
+
+@mixin mobile-small() {
+    @media (max-width: 400px) {
+        @content;
+    }
+}
+
+@mixin pc() {
+    @media (min-width: 1000px) {
+        @content;
+    }
+}
+
+@mixin landscape() {
+    @media screen and (orientation:landscape) {
+        @content;
+    }
+}
+
+@mixin portrait() {
+    @media screen and (orientation:portrait) {
+        @content;
+    }
+}
+
+/**
+ * Hide the scrollbars in the selector this is applied.
+ */
+@mixin hide-scrollbars() {
+    scrollbar-width: none; /* Firefox 64 */
+
+    &::-webkit-scrollbar {
+        position: fixed;
+        left: -100%;
+        top: -100%;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+        scrollbar-width: none; /* Firefox 64 */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0);
+    }
+}
