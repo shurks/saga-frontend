@@ -434,6 +434,19 @@ export const categories: ({
 				}
 			]
 		}
+	},
+	{
+		title: <>Download my Saga</>,
+		count: 0,
+		icon: <DownloadIcon />,
+		description: <>
+			Download my Saga, based on these inputs within these categories, to see what my psychosis was like for me.
+		</>,
+		hex: '#ff1744',
+		meta: {
+			type: 'saga',
+			values: []
+		}
 	}
 ]
 
@@ -474,6 +487,10 @@ export default class App extends React.Component<any, AppState> {
 						categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
 							? (
 								<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
+									if (this.state.categoryId === String(i) && categories.find((v, i) => String(i) === this.state.categoryId)) {
+										document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
+										return
+									}
 									this.setState({
 										categoryId: this.state.categoryId === String(i) ? null : String(i),
 										animating: true,
