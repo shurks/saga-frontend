@@ -491,20 +491,22 @@ export default class App extends React.Component<any, AppState> {
 										document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
 										return
 									}
-									this.setState({
-										categoryId: this.state.categoryId === String(i) ? null : String(i),
-										animating: true,
-										page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
-									}, () => {
-										setTimeout(() => {
-											this.setState({
-												animating: false,
-												page: this.state.categoryId === null
-													? { type: 'menu' }
-													: { type: 'category', id: String(i), index: i }
-											})
-										}, 500)
-									})
+									else {
+										this.setState({
+											categoryId: this.state.categoryId === String(i) ? null : String(i),
+											animating: true,
+											page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
+										}, () => {
+											setTimeout(() => {
+												this.setState({
+													animating: false,
+													page: this.state.categoryId === null
+														? { type: 'menu' }
+														: { type: 'category', id: String(i), index: i }
+												})
+											}, 500)
+										})
+									}
 								}} />
 							)
 							: null
