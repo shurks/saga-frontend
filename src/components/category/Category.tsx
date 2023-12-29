@@ -65,7 +65,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                             : 'none'
                         : undefined
             } as React.CSSProperties} onClick={() => {
-                if (this.props.category.meta?.type === 'saga') {
+                if (this.props.category.meta?.type === 'saga' && this.props.selected === this.props.id) {
                     document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
                     return
                 }
