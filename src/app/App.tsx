@@ -487,7 +487,7 @@ export default class App extends React.Component<any, AppState> {
 						categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
 							? (
 								<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
-									if (this.state.categoryId === String(i) && categories.find((v, i) => String(i) === this.state.categoryId)) {
+									if (v.meta?.type === 'saga') {
 										document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
 										return
 									}
