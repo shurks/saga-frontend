@@ -541,7 +541,7 @@ export default class App extends React.Component<any, AppState> {
 										</div>
 									</div>
 								))
-								: categories.find((v, i) => String(i) === this.state.categoryId)!.slug === 'scenario'
+								: categories.find((v, i) => String(i) === this.state.categoryId)!.slug === 'scenarios'
 									? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.map((v) => (
 										<div className="category-scenario">
 											<div className="category-scenario-title">
