@@ -47,17 +47,33 @@
 
             .app-content {
                 &-right {
-                    @include pc {
-                        position: absolute;
-                        right: 0;
-                        top: 0;
-                        padding-left: calc(33vw + 25px);
-                        padding-right: 20px;
-                        padding-top: 25px;
+                    height: 300px;
+
+                    &:not(.done-animating) {
+                        @include pc {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                        }
+    
+                        @include mobile {
+                            padding-top: 15px;
+                        }
                     }
 
-                    @include mobile {
-                        padding-top: 15px;
+                    &.done-animating {
+                        vertical-align: top;
+                        display: inline-block;
+
+                        @include pc {
+                            padding-left: calc(33vw + 25px);
+                            padding-right: 20px;
+                            padding-top: 25px;
+                        }
+
+                        @include mobile {
+                            padding-top: 15px;
+                        }
                     }
 
                     &-title {

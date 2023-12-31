@@ -4,6 +4,14 @@
 .category-container {
     $padding: 10px;
 
+    &:not(.fading):not(.unfading).in-category {
+        height: auto;
+
+        .category-inner {
+            height: auto;
+        }
+    }
+
     @include mobile {
         $categoryHeight: 325px;
         height: $categoryHeight;

@@ -116,6 +116,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
         return (
             <div className={classNames({
                 'category-container': true,
+                'in-category': this.props.page.route === 'category',
                 'big-icon': this.state.cubeTransition.index === 1,
                 'fading': this.props.selected !== this.props.id && this.props.animating && this.props.page.route === 'menu',
                 'unfading': this.props.selected !== this.props.id && this.props.animating && this.props.page.route === 'category',

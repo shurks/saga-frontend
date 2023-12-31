@@ -505,7 +505,10 @@ export default class App extends React.Component<any, AppState> {
 					}
 					{
 						this.state.page.route === 'category'
-						&& <div className="app-content-right">
+						&& <div className={classNames({
+							'app-content-right': true,
+							'done-animating': !this.state.animating
+						})}>
 							<div className="app-content-right-title">
 								{categories.find((v, i) => String(i) === this.state.categoryId)?.title || 'Unknown'}
 							</div>
