@@ -43,7 +43,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
             <div className={classNames({
                 'category-container': true,
                 'fading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'menu',
-                'unfading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'category'
+                'unfading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'category',
             })} ref={this.containerRef} style={{
                 '--primary-color': this.props.category.hex,
                 transform: this.props.page.type === 'menu'
