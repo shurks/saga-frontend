@@ -112,9 +112,16 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                             })}>
                                 <div className="category-inner-title">
                                     {this.props.category.title}
-                                    <div className="category-inner-title-count">
-                                        {this.props.category.meta?.values.length}
-                                    </div>
+                                    {
+                                        this.props.category.meta?.values.length
+                                        ?
+                                        (
+                                            <div className="category-inner-title-count">
+                                                {this.props.category.meta?.values.length}
+                                            </div>
+                                        )
+                                        : <></>
+                                    }
                                 </div>
                                 <div className="category-inner-icon">
                                     {this.props.category.icon}
