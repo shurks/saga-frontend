@@ -5,7 +5,7 @@
     $padding: 10px;
 
     @include mobile {
-        $categoryHeight: 300px;
+        $categoryHeight: 325px;
         height: $categoryHeight;
 
         .category-inner {
@@ -14,7 +14,7 @@
     }
 
     @media (min-width: 778px) {
-        $categoryHeight: 425px;
+        $categoryHeight: 550px;
         height: $categoryHeight;
 
         .category-inner {
@@ -23,7 +23,7 @@
     }
 
     @media (min-width: 850px) {
-        $categoryHeight: 375px;
+        $categoryHeight: 500px;
         height: $categoryHeight;
 
         .category-inner {
@@ -32,7 +32,16 @@
     }
 
     @media (min-width: 1000px) {
-        $categoryHeight: 350px;
+        $categoryHeight: 450px;
+        height: $categoryHeight;
+
+        .category-inner {
+            height: $categoryHeight - $padding * 2;
+        }
+    }
+
+    @media (min-width: 1100px) {
+        $categoryHeight: 400px;
         height: $categoryHeight;
 
         .category-inner {
@@ -88,7 +97,8 @@
     
                 .category-inner-description {
                     color: #efefef!important;
-                    &::before, &::after {
+
+                    &-quote-open, &-quote-close {
                         color: #fff!important;
                     }
                 }
@@ -178,20 +188,33 @@
                         padding: 0 20px;
                         box-sizing: border-box;
                         @include transition(all 0.3s ease-in-out);
-            
-                        &::before, &::after {
-                            position: absolute;
-                            font-size: 2em;
+
+                        &-quote-open, &-quote-content, &-quote-close {
+                            display: inline-block;
+                            vertical-align: bottom;
+                            color: var(---primary-color);
+                        }
+
+                        &-quote-open, &-quote-close {
+                            font-size: 4em;
+                            width: 5%;
                             color: var(--primary-color);
                             @include transition(all 0.3s ease-in-out);
                         }
-                        &::before {
-                            @include transform(translate(-15px, -10px));
-                            content: open-quote;
+
+                        &-quote-content {
+                            width: 90%;
+                            font-size: 1.2em;
                         }
-                        &::after {
-                            @include transform(translate(5px, -6px));
-                            content: close-quote;
+
+                        &-quote-open {
+                            vertical-align: top;
+                            @include transform(translateY(-20px));
+                        }
+
+                        &-quote-close {
+                            vertical-align: bottom;
+                            @include transform(translateY(50px));
                         }
                     }
             
@@ -222,7 +245,7 @@
                 
                             .category-inner-description {
                                 color: #555;
-                                &::before, &::after {
+                                &-quote-open, &-quote-close {
                                     color: var(--primary-color);
                                 }
                             }
@@ -252,7 +275,7 @@
             
                         .category-inner-description {
                             color: #efefef;
-                            &::before, &::after {
+                            &-quote-open, &-quote-close {
                                 color: #fff;
                             }
                         }

@@ -129,7 +129,15 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                                     {this.props.category.icon}
                                 </div>
                                 <div className="category-inner-description">
-                                    {this.props.category.description}
+                                    <div className="category-inner-description-quote-open">
+                                        ‘‘
+                                    </div>
+                                    <div className="category-inner-description-quote-content">
+                                        {this.props.category.description}
+                                    </div>
+                                    <div className="category-inner-description-quote-close">
+                                        ’’
+                                    </div>
                                 </div>
                             </div>
                         </div>
