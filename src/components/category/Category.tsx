@@ -3,6 +3,8 @@ import TheaterComedyIcon from '@mui/icons-material/TheaterComedy'
 import './category.scss'
 import classNames from 'classnames'
 import { AppState, categories } from '../../app/App'
+import Emitter from '../../utils/reactive/emitter'
+import Listener from '../../utils/reactive/listener'
 
 interface CategoryProps {
     category: typeof categories[number]
@@ -24,6 +26,12 @@ interface CategoryState {
 }
 
 export default class Category extends React.Component<CategoryProps, CategoryState> {
+    public static performCubeTransition = new Emitter<string>()
+    private performCubeTransitionListener: Listener | null = null
+    
+    public static resetCubeTransition = new Emitter<void>()
+    private resetCubeTransitionListener: Listener | null = null
+
     public containerRef!: React.RefObject<HTMLDivElement>
     
     constructor(props: any) {
@@ -38,15 +46,81 @@ export default class Category extends React.Component<CategoryProps, CategorySta
         }
     }
 
+    public componentDidMount(): void {
+        this.resetCubeTransitionListener = Category.resetCubeTransition.listen.always(() => {
+            if (this.state.cubeTransition.index === 0) {
+                return
+            }
+            this.setState({
+                cubeTransition: {
+                    ...this.state.cubeTransition,
+                    toIndex: this.state.cubeTransition.index === 0 ? 1 : 0,
+                    fromIndex: this.state.cubeTransition.index
+                },
+                selected: this.props.selected === this.props.id
+                    ? this.props.id
+                    : this.props.page.route === 'category'
+                        ? this.props.id
+                        : null
+            }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        cubeTransition: {
+                            ...this.state.cubeTransition,
+                            fromIndex: null,
+                            toIndex: null,
+                            index: this.state.cubeTransition.toIndex || 0
+                        },
+                        selected: null
+                    })
+                }, 500)
+            })
+        })
+        this.performCubeTransitionListener = Category.performCubeTransition.listen.always((slug) => {
+            if (slug === this.props.category.slug) {
+                this.setState({
+                    cubeTransition: {
+                        ...this.state.cubeTransition,
+                        toIndex: this.state.cubeTransition.index === 0 ? 1 : 0,
+                        fromIndex: this.state.cubeTransition.index
+                    },
+                    selected: this.props.selected === this.props.id
+                        ? this.props.id
+                        : this.props.page.route === 'category'
+                            ? this.props.id
+                            : null
+                }, () => {
+                    this.props.onClick()
+                    setTimeout(() => {
+                        this.setState({
+                            cubeTransition: {
+                                ...this.state.cubeTransition,
+                                fromIndex: null,
+                                toIndex: null,
+                                index: this.state.cubeTransition.toIndex || 0
+                            },
+                            selected: null
+                        })
+                    }, 500)
+                })
+            }
+        })
+    }
+
+    public componentWillUnmount(): void {
+        this.resetCubeTransitionListener?.unsubscribe()
+        this.performCubeTransitionListener?.unsubscribe()
+    }
+
     public render() {
         return (
             <div className={classNames({
                 'category-container': true,
-                'fading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'menu',
-                'unfading': this.props.selected !== this.props.id && this.props.animating && this.props.page.type === 'category',
+                'fading': this.props.selected !== this.props.id && this.props.animating && this.props.page.route === 'menu',
+                'unfading': this.props.selected !== this.props.id && this.props.animating && this.props.page.route === 'category',
             })} ref={this.containerRef} style={{
                 '--primary-color': this.props.category.hex,
-                transform: this.props.page.type === 'menu'
+                transform: this.props.page.route === 'menu'
                     ? this.props.selected !== this.props.id && this.props.animating
                         ? (this.props.index + 1) % 3 === 0
                             ? this.state.selected === this.props.id ? 'scale(0.5)' : `translateX(50%) scale(0.5)`
@@ -60,7 +134,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                 transition: this.state.selected
                     ? 'all 0.5s ease-in-out'
                     : this.props.selected === this.props.id && !this.props.animating
-                        ? this.props.page.type === 'menu'
+                        ? this.props.page.route === 'menu'
                             ? undefined
                             : 'none'
                         : undefined
@@ -70,31 +144,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                     return
                 }
                 else {
-                    this.setState({
-                        cubeTransition: {
-                            ...this.state.cubeTransition,
-                            toIndex: this.state.cubeTransition.index === 0 ? 1 : 0,
-                            fromIndex: this.state.cubeTransition.index
-                        },
-                        selected: this.props.selected === this.props.id
-                            ? this.props.id
-                            : this.props.page.type === 'category'
-                                ? this.props.id
-                                : null
-                    }, () => {
-                        this.props.onClick()
-                        setTimeout(() => {
-                            this.setState({
-                                cubeTransition: {
-                                    ...this.state.cubeTransition,
-                                    fromIndex: null,
-                                    toIndex: null,
-                                    index: this.state.cubeTransition.toIndex || 0
-                                },
-                                selected: null
-                            })
-                        }, 500)
-                    })
+                    Category.performCubeTransition.emit(this.props.category.slug)
                 }
             }}>
                 <div className={classNames({
@@ -148,7 +198,7 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                         })}>
                             <div className={classNames({
                                 'category-inner': true,
-                                'selected': this.props.page.type === 'category'
+                                'selected': this.props.page.route === 'category'
                             })}>
                                 <div className="category-inner-icon">
                                     {this.props.category.icon}

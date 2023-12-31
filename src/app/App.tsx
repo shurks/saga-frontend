@@ -19,8 +19,8 @@ import classNames from 'classnames'
 export interface AppState {
 	categoryId: string | null,
 	animating: boolean
-	page: { type: 'menu' }
-		| { type: 'category', id: string, index: number }
+	page: { route: 'menu' }
+		| { route: 'category', id: string, index: number }
 }
 
 export const categories: ({
@@ -427,16 +427,30 @@ export const categories: ({
 	}
 ]
 
-export default class App extends React.Component<any, AppState> {
+export default class App extends React.Component<any, AppState> {	
 	constructor(props: any) {
 		super(props)
 		this.state = {
 			categoryId: null,
 			animating: false,
 			page: {
-				type: 'menu'
+				route: 'menu'
 			}
 		}
+	}
+
+	public componentDidMount(): void {
+		window.addEventListener('popstate', this.onPopState)
+		this.onPopState({} as any)
+	}
+
+	public componentWillUnmount(): void {
+		window.addEventListener('popstate', this.onPopState)
+	}
+
+	public shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<AppState>, nextContext: any): boolean {
+		this.handleRouting()
+		return true
 	}
 
 	public render() {
@@ -452,9 +466,9 @@ export default class App extends React.Component<any, AppState> {
 				</div>
 				<div className={classNames({
 					'app-content': true,
-					'category': this.state.page.type === 'category'
+					'category': this.state.page.route === 'category'
 				})} style={{
-					...this.state.page.type === 'category'
+					...this.state.page.route === 'category'
 						? {
 							'--primary-color': categories.filter((v, i) => String(i) === this.state.categoryId)[0].hex
 						}
@@ -463,7 +477,7 @@ export default class App extends React.Component<any, AppState> {
 					{
 						categories.map((v, i) => this.state.categoryId === null || this.state.categoryId === String(i) || this.state.animating
 							? (
-								<Category key={i} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
+								<Category key={`category-${i}`} index={i} category={v} page={this.state.page} animating={this.state.animating} selected={this.state.categoryId} id={String(i)} onClick={() => {
 									if (v.slug === 'download') {
 										document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
 										return
@@ -472,14 +486,14 @@ export default class App extends React.Component<any, AppState> {
 										this.setState({
 											categoryId: this.state.categoryId === String(i) ? null : String(i),
 											animating: true,
-											page: this.state.categoryId === String(i) ? { type: 'menu' } : this.state.page
+											page: this.state.categoryId === String(i) ? { route: 'menu' } : this.state.page
 										}, () => {
 											setTimeout(() => {
 												this.setState({
 													animating: false,
 													page: this.state.categoryId === null
-														? { type: 'menu' }
-														: { type: 'category', id: String(i), index: i }
+														? { route: 'menu' }
+														: { route: 'category', id: String(i), index: i }
 												})
 											}, 500)
 										})
@@ -490,7 +504,7 @@ export default class App extends React.Component<any, AppState> {
 						)
 					}
 					{
-						this.state.page.type === 'category'
+						this.state.page.route === 'category'
 						&& <div className="app-content-right">
 							<div className="app-content-right-title">
 								{categories.find((v, i) => String(i) === this.state.categoryId)?.title || 'Unknown'}
@@ -502,13 +516,13 @@ export default class App extends React.Component<any, AppState> {
 					}
 				</div>
 				{
-					this.state.page.type === 'category'
+					this.state.page.route === 'category'
 					&& (categories.find((v, i) => String(i) === this.state.categoryId))
 					&& <div className="app-bottom">
 						{
 							categories.find((v, i) => String(i) === this.state.categoryId)?.slug === 'actors'
-								? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.map((v) => (
-									<div className="category-actor">
+								? categories.find((v, i) => String(i) === this.state.categoryId)!.meta?.map((v, i) => (
+									<div className="category-actor" key={`category-actor-${i}`}>
 										<div className="category-actor-left">
 											<div className="category-actor-left-table">
 												<div className="category-actor-left-table-title">
@@ -655,5 +669,71 @@ export default class App extends React.Component<any, AppState> {
 				}
 			</div>
 		)
+	}
+
+	/**
+	 * Whenever a route is pushed back or forth
+	 */
+	private onPopState = (event: PopStateEvent) => {
+		if (window.location.pathname === '/') {
+			if (this.state.page.route === 'category') {
+				Category.resetCubeTransition.emit()
+				this.setState({
+					categoryId: null,
+					animating: true,
+					page: { route: 'menu' }
+				}, () => {
+					setTimeout(() => {
+						this.setState({
+							animating: false,
+							page: { route: 'menu' }
+						})
+					}, 500)
+				})
+			}
+		}
+		else if (window.location.pathname.startsWith('/category/')) {
+			const slug = window.location.pathname.replace(/(\/category\/)([^\/])/, '$2')
+			const categoryId = categories.map((v, i) => v.slug === slug ? i : null).filter((v, i, a) => v !== null)[0]
+			if (!categoryId && categoryId !== 0) {
+				console.log({slug, categories, categoryId})
+				throw new Error(`Category id could not be found.`)
+			}
+			if (slug === 'download') {
+				document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
+				return
+			}
+			else {
+				Category.performCubeTransition.emit(slug)
+				this.setState({
+					categoryId: null,
+					animating: true,
+					page: { route: 'menu' }
+				}, () => {
+					setTimeout(() => {
+						this.setState({
+							animating: false,
+							page: { route: 'category', id: String(categoryId), index: categoryId }
+						})
+					}, 500)
+				})
+			}
+		}
+	}
+
+	/**
+	 * Handles the routing
+	 */
+	private handleRouting() {
+		setTimeout(() => {
+			const pathname = this.state.page.route === 'menu'
+				? '/'
+				: this.state.page.route === 'category'
+					? `/category/${categories.find((v, i) => String(i) === this.state.categoryId)?.slug}`
+					: '/'
+			if (window.location.pathname !== pathname) {
+				window.history.pushState(null, '', pathname)
+			}
+		})
 	}
 }
