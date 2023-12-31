@@ -2,18 +2,21 @@
 @import "../../cube.scss";
 
 .category-container {
+    $categoryHeight: 325px;
+    $padding: 10px;
+
     position: relative;
-    display: inline-block;
-    width: 33%;
-    @include pc {
-        min-height: 300px;
-    }
-    @include mobile {
-        min-height: 275px;
-    }
-    padding: 5px;
+    padding: $padding / 2;
     box-sizing: border-box;
+
+    height: $categoryHeight;
+
     @include transition(all 0.5s ease-in-out);
+    
+    @include pc {
+        display: inline-block;
+        width: 33%;
+    }
 
     @include mobile {
         width: 100%;
@@ -92,9 +95,7 @@
                     border-radius: 10px;
                     text-align: center;
                     background: #efefef;
-                    @include pc {
-                        height: 300px;
-                    }
+                    height: $categoryHeight - $padding * 2;
                     box-sizing: border-box;
             
                     @include box-shadow(-2px -2px 10px rgba(127, 127, 127, 0.15));
@@ -142,6 +143,8 @@
                         color: #555;
                         line-height: 1.5;
                         margin-top: 10px;
+                        padding: 0 20px;
+                        box-sizing: border-box;
                         @include transition(all 0.3s ease-in-out);
             
                         &::before, &::after {
