@@ -21,6 +21,7 @@ export interface AppState {
 	animating: boolean
 	page: { route: 'menu' }
 		| { route: 'category', id: string, index: number }
+	topBarHovered: boolean
 }
 
 export const categories: ({
@@ -435,7 +436,8 @@ export default class App extends React.Component<any, AppState> {
 			animating: false,
 			page: {
 				route: 'menu'
-			}
+			},
+			topBarHovered: false
 		}
 	}
 
@@ -456,11 +458,40 @@ export default class App extends React.Component<any, AppState> {
 	public render() {
 		return (
 			<div className="app">
-				<div className="app-top">
+				<div className={classNames({
+					'app-top': true,
+					'hovered': this.state.topBarHovered
+				})}>
 					<div className="app-top-title">
-						We all believe in things
+						{
+							this.state.topBarHovered
+							?
+							<div>
+								Open menu
+							</div>
+							:
+							<div>
+								We all believe in things
+							</div>
+						}
 					</div>
-					<div className="app-top-logo">
+					<div className="app-top-logo" onMouseEnter={() => {
+						this.setState({
+							topBarHovered: true
+						})
+					}} onMouseLeave={() => {
+						this.setState({
+							topBarHovered: false
+						})
+					}} onTouchStart={() => {
+						this.setState({
+							topBarHovered: true
+						})
+					}} onTouchEnd={() => {
+						this.setState({
+							topBarHovered: false
+						})
+					}}>
 						<img src={AppLogo} alt="Logo" />
 					</div>
 				</div>
