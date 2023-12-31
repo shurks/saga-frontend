@@ -65,35 +65,37 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                             : 'none'
                         : undefined
             } as React.CSSProperties} onClick={() => {
-                if (this.props.category.meta?.type === 'saga' && this.props.selected === this.props.id) {
+                if (this.props.category.slug === 'download' && this.props.selected === this.props.id) {
                     document.location = 'https://hurx.io/we-all-believe-in-things.pdf'
                     return
                 }
-                this.setState({
-                    cubeTransition: {
-                        ...this.state.cubeTransition,
-                        toIndex: this.state.cubeTransition.index === 0 ? 1 : 0,
-                        fromIndex: this.state.cubeTransition.index
-                    },
-                    selected: this.props.selected === this.props.id
-                        ? this.props.id
-                        : this.props.page.type === 'category'
+                else {
+                    this.setState({
+                        cubeTransition: {
+                            ...this.state.cubeTransition,
+                            toIndex: this.state.cubeTransition.index === 0 ? 1 : 0,
+                            fromIndex: this.state.cubeTransition.index
+                        },
+                        selected: this.props.selected === this.props.id
                             ? this.props.id
-                            : null
-                }, () => {
-                    this.props.onClick()
-                    setTimeout(() => {
-                        this.setState({
-                            cubeTransition: {
-                                ...this.state.cubeTransition,
-                                fromIndex: null,
-                                toIndex: null,
-                                index: this.state.cubeTransition.toIndex || 0
-                            },
-                            selected: null
-                        })
-                    }, 500)
-                })
+                            : this.props.page.type === 'category'
+                                ? this.props.id
+                                : null
+                    }, () => {
+                        this.props.onClick()
+                        setTimeout(() => {
+                            this.setState({
+                                cubeTransition: {
+                                    ...this.state.cubeTransition,
+                                    fromIndex: null,
+                                    toIndex: null,
+                                    index: this.state.cubeTransition.toIndex || 0
+                                },
+                                selected: null
+                            })
+                        }, 500)
+                    })
+                }
             }}>
                 <div className={classNames({
                     'animation-cube': true,
@@ -113,11 +115,11 @@ export default class Category extends React.Component<CategoryProps, CategorySta
                                 <div className="category-inner-title">
                                     {this.props.category.title}
                                     {
-                                        this.props.category.meta?.values.length
+                                        this.props.category.meta?.length
                                         ?
                                         (
                                             <div className="category-inner-title-count">
-                                                {this.props.category.meta?.values.length}
+                                                {this.props.category.meta?.length}
                                             </div>
                                         )
                                         : <></>
