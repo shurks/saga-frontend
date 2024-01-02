@@ -14,6 +14,7 @@ import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import DownloadIcon from '@mui/icons-material/Download'
+import CloseIcon from '@mui/icons-material/Close';
 import classNames from 'classnames'
 
 export interface AppState {
@@ -22,6 +23,11 @@ export interface AppState {
 	page: { route: 'menu' }
 		| { route: 'category', id: string, index: number }
 	topBarHovered: boolean
+	cubeTransitionMenuTop: {
+		index: number,
+		toIndex: number|null
+		fromIndex: number|null
+	}
 }
 
 export const categories: ({
@@ -437,7 +443,12 @@ export default class App extends React.Component<any, AppState> {
 			page: {
 				route: 'menu'
 			},
-			topBarHovered: false
+			topBarHovered: false,
+			cubeTransitionMenuTop: {
+				index: 0,
+				toIndex: null,
+				fromIndex: null
+			}
 		}
 	}
 
@@ -460,39 +471,131 @@ export default class App extends React.Component<any, AppState> {
 			<div className="app">
 				<div className={classNames({
 					'app-top': true,
-					'hovered': this.state.topBarHovered
+					'menu': this.state.cubeTransitionMenuTop.index === 1
 				})}>
-					<div className="app-top-title">
-						{
-							this.state.topBarHovered
-							?
-							<div>
-								Open menu
+					<div className={classNames({
+						'animation-cube': true,
+						'animation-cube-bottom-to-top': this.state.cubeTransitionMenuTop.toIndex !== null && this.state.cubeTransitionMenuTop.fromIndex !== null
+							&& this.state.cubeTransitionMenuTop.toIndex < this.state.cubeTransitionMenuTop.fromIndex,
+						'animation-cube-top-to-bottom': this.state.cubeTransitionMenuTop.toIndex !== null && this.state.cubeTransitionMenuTop.fromIndex !== null
+							&& this.state.cubeTransitionMenuTop.toIndex > this.state.cubeTransitionMenuTop.fromIndex,
+						'box-shadow': this.state.cubeTransitionMenuTop.index === 1
+					})}>
+						<div className="cube">
+							<div className={classNames({
+								'app-top-container': true,
+								'active': this.state.cubeTransitionMenuTop.index === 0,
+								'hovered': this.state.topBarHovered,
+							})}>
+								<div className="app-top-container-title">
+									{
+										this.state.topBarHovered
+										?
+										<div>
+											Menu
+										</div>
+										:
+										<div>
+											We all believe in things
+										</div>
+									}
+								</div>
+								<div className="app-top-container-logo" onMouseEnter={() => {
+									this.setState({
+										topBarHovered: true
+									})
+								}} onMouseLeave={() => {
+									this.setState({
+										topBarHovered: false
+									})
+								}} onTouchStart={() => {
+									this.setState({
+										topBarHovered: true
+									})
+								}} onTouchEnd={() => {
+									this.setState({
+										topBarHovered: false
+									})
+								}} onClick={() => {
+									this.setState({
+										cubeTransitionMenuTop: {
+											...this.state.cubeTransitionMenuTop,
+											toIndex: 1,
+											fromIndex: 0
+										}
+									}, () => {
+										setTimeout(() => {
+											this.setState({
+												cubeTransitionMenuTop: {
+													...this.state.cubeTransitionMenuTop,
+													toIndex: null,
+													fromIndex: null,
+													index: 1
+												}
+											})
+										}, 500)
+									})
+								}}>
+									<img src={AppLogo} alt="Logo" />
+								</div>
 							</div>
-							:
-							<div>
-								We all believe in things
+							<div className={classNames({
+								'app-top-container': true,
+								'active': this.state.cubeTransitionMenuTop.index === 1,
+								'hovered': this.state.topBarHovered,
+								'menu': true
+							})}>
+								<div className="app-top-container-title">
+									<input placeholder="Search..." />
+								</div>
+								<div className="app-top-container-logo" onMouseEnter={() => {
+									this.setState({
+										topBarHovered: true
+									})
+								}} onMouseLeave={() => {
+									this.setState({
+										topBarHovered: false
+									})
+								}} onTouchStart={() => {
+									this.setState({
+										topBarHovered: true
+									})
+								}} onTouchEnd={() => {
+									this.setState({
+										topBarHovered: false
+									})
+								}} onClick={() => {
+									this.setState({
+										cubeTransitionMenuTop: {
+											...this.state.cubeTransitionMenuTop,
+											toIndex: 0,
+											fromIndex: 1
+										}
+									}, () => {
+										setTimeout(() => {
+											this.setState({
+												cubeTransitionMenuTop: {
+													...this.state.cubeTransitionMenuTop,
+													toIndex: null,
+													fromIndex: null,
+													index: 0
+												}
+											})
+										}, 500)
+									})
+								}}>
+									<CloseIcon />
+								</div>
 							</div>
-						}
+						</div>
 					</div>
-					<div className="app-top-logo" onMouseEnter={() => {
-						this.setState({
-							topBarHovered: true
-						})
-					}} onMouseLeave={() => {
-						this.setState({
-							topBarHovered: false
-						})
-					}} onTouchStart={() => {
-						this.setState({
-							topBarHovered: true
-						})
-					}} onTouchEnd={() => {
-						this.setState({
-							topBarHovered: false
-						})
-					}}>
-						<img src={AppLogo} alt="Logo" />
+					<div className={classNames({
+						'app-top-content': true,
+						'active': this.state.cubeTransitionMenuTop.index === 1,
+						'animating-forward': this.state.cubeTransitionMenuTop.toIndex === 1,
+						'animating-backward': this.state.cubeTransitionMenuTop.toIndex === 0
+					})}>
+						Hi content
 					</div>
 				</div>
 				<div className={classNames({
